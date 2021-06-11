@@ -3,18 +3,23 @@
 
 # TODO:  
 # make clean backups and recovery
-# abstract out $HOME
-# installs for linux v mac
 # setup powerline
 # setup iterm2 as option
 # setup oh-my-zsh as option
 # setup tmux
 # setup python and go
+# explore:  https://www.atlassian.com/git/tutorials/dotfiles
+
+
+KERNEL="$(uname -s)"
 
 # kludge simlink for now
-ln -s -f ~/dotfiles/.vimrc ~/.vimrc
-ln -s -f ~/dotfiles/.zshrc ~/.zshrc
-ln -s -f ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -sf $PWD/.vimrc ~/.vimrc
+ln -sf $PWD/.zshrc ~/.zshrc
+ln -sf $PWD/.tmux.conf ~/.tmux.conf
 
-# for iterm2
-ln -s -f ~/dotfiles/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+if [[ "$KERNEL" == "Darwin" ]]; then
+	echo "configuring for macos"
+	# for iterm2
+	ln -sf $PWD/com.googlecode.iterm2.plist $HOME/Library/Preferences/com.googlecode.iterm2.plist
+fi
